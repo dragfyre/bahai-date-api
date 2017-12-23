@@ -1,0 +1,33 @@
+{
+  "name": "bahai-date-rest-api",
+  "version": "1.0.0",
+  "description": "RESTful Baha'i date API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: No test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dragfyre/bahai-date-api.git"
+  },
+  "keywords": [
+    "RESTful",
+    "API",
+    "date",
+    "calendar",
+    "Baha'i"
+  ],
+  "author": "dragfyre",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dragfyre/bahai-date-api/issues"
+  },
+  "homepage": "https://github.com/dragfyre/bahai-date-api#readme",
+  "devDependencies": {
+    "nodemon": "^1.14.1"
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
