@@ -28,6 +28,10 @@
     "nodemon": "^1.14.1"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "deep-extend": "^0.6.0",
+    "express": "^4.16.2",
+    "fsevents": "^2.0.1",
+    "randomatic": "^3.1.1",
+    "rc": "^1.2.8"
   }
 }
