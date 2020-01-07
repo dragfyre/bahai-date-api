@@ -2,7 +2,7 @@
 var BadiCal = require('../../vendor/assets/badi-cal/index.js');
 
 function sanitize_input(s) {
-  if (s==''||s==undefined||s==null||s==false||isNaN(s)) { return 0; }
+  if (s==''||s===undefined||s===null||s==false||isNaN(s)) { return 0; }
   else { return parseInt(s,10); }
 }
 
