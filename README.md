@@ -1,14 +1,14 @@
-# Baha'i Date RESTful API
+# Baháʼí Date RESTful API
 
 So far, there are two endpoints for this API:
 
 **GET /today**
 
-Returns today's date according to the Baha'i/Badi calendar.
+Returns today's date according to the Baháʼí/Badí' calendar.
 
 **POST /date**
 
-Given a date from the Gregorian calendar defined via POST data, returns the corresponding date in the Baha'i calendar.
+Given a date from the Gregorian calendar defined via POST data, returns the corresponding date in the Baháʼí calendar.
 
 ## Running
 
@@ -16,12 +16,13 @@ To launch the API server, simply navigate to the main folder and type 'npm run s
 
 ## Examples
 
-From either endpoint, the output is returned in a similar format: a JSON object containing a message, a Baha'i calendar date, and a Gregorian date/time.
+From either endpoint, the output is returned in a similar format: a JSON object containing a message, a Baháʼí calendar date, and a Gregorian date/time.
 
 ### Today
 
 URL: localhost:1844/today
 
+```json
 {
     "message": "Today is 13 Masá’il 174",
     "badi_date": {
@@ -39,6 +40,7 @@ URL: localhost:1844/today
         "second": 12
     }
 }
+```
 
 ### May 23, 1844
 
@@ -46,6 +48,7 @@ URL: localhost:1844/date?year=1844&month=5&day=23&hour=20&minute=45
 
 Output:
 
+```json
 {
     "message": "The date is: 9 ‘Aẓamat 1",
     "badi_date": {
@@ -63,6 +66,7 @@ Output:
         "second": 0
     }
 }
+```
 
 ### February 15, 2014
 
@@ -70,6 +74,7 @@ URL: localhost:1844/date?year=2014&month=2&day=15&hour=13&minute=45
 
 Output:
 
+```json
 {
     "message": "The date is: 10 Mulk 170",
     "badi_date": {
@@ -87,3 +92,4 @@ Output:
         "second": 0
     }
 }
+```
