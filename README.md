@@ -12,7 +12,7 @@ Given a date from the Gregorian calendar defined via POST data, returns the corr
 
 ## Running
 
-To launch the API server, simply navigate to the main folder and type 'npm run start'.
+To launch the API server, simply navigate to the main folder and type `npm start`.
 
 ## Examples
 
