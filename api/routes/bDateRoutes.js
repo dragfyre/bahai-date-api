@@ -11,4 +11,7 @@ module.exports = function(app) {
   // Arbitrary Badi date
   app.route('/date')
     .get(bDate.date);
+
+  app.route('/today')
+    .get(bDate.todayHtml);
 };

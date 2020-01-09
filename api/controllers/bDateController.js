@@ -9,16 +9,42 @@ function sanitize_input(s) {
 exports.test = function(req, res) {
   res.json({ message: 'Hi there' });
 };
-exports.today = function(req, res) {
+
+function getTodayJSON () {
   var now = new Date();
   var here = new Object();
   here['latitude'] = '40.712'; // New York
   here['longitude'] = '-74.006';
 
   var now_badi = BadiCal.BadiDate.fromGregorianDate(now, here);
-  res.json({ message: "Today is " + now_badi.toString(),badi_date:{year:now_badi.getYear(),month:now_badi.getMonth(),day:now_badi.getDay(),month_name:now_badi.getMonthName()},greg_date:{year:now.getFullYear(),month:now.getMonth()+1,day:now.getDay(),hour:now.getHours(),minute:now.getMinutes(),second:now.getSeconds()}});
   console.log("Today: " + now_badi.toString());
+  return {
+    message: "Today is " + now_badi.toString(),
+    badi_date:{
+      year:now_badi.getYear(),
+      month:now_badi.getMonth(),
+      day:now_badi.getDay(),
+      month_name:now_badi.getMonthName()
+    },
+    greg_date:{
+      year:now.getFullYear(),
+      month:now.getMonth()+1,
+      day:now.getDay(),
+      hour:now.getHours(),
+      minute:now.getMinutes(),
+      second:now.getSeconds()
+    }
+  };
+}
+
+exports.today = function(req, res) {
+  res.json(getTodayJSON());
 };
+
+exports.todayHtml = function(req, res) {
+  res.end(JSON.stringify(getTodayJSON(), null, 2));
+};
+
 exports.date = function(req, res) {
   var year = sanitize_input(req.query['year']);
   var month = sanitize_input(req.query['month'])-1;
