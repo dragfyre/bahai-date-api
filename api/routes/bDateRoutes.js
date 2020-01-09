@@ -1,7 +1,7 @@
 'use strict';
-module.exports = function(app) {
-  var bDate = require('../controllers/bDateController');
+var bDate = require('../controllers/bDateController');
 
+module.exports = function(app) {
   // API test
   app.route('/test')
     .get(bDate.test);

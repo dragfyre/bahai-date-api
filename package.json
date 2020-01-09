@@ -4,8 +4,12 @@
   "description": "RESTful Baha'i date API",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "echo \"Error: No test specified\" && exit 1",
     "start": "nodemon server.js"
+  },
+  "engines": {
+    "node": ">=8.0.0"
   },
   "repository": {
     "type": "git",
@@ -19,18 +23,20 @@
     "Baha'i"
   ],
   "author": "dragfyre",
+  "contributors": [],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/dragfyre/bahai-date-api/issues"
   },
   "homepage": "https://github.com/dragfyre/bahai-date-api#readme",
   "devDependencies": {
-    "nodemon": "^1.14.1"
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2"
   },
   "dependencies": {
     "deep-extend": "^0.6.0",
-    "express": "^4.16.2",
-    "fsevents": "^2.0.1",
+    "express": "^4.17.1",
+    "fsevents": "^2.1.2",
     "randomatic": "^3.1.1",
     "rc": "^1.2.8"
   }
