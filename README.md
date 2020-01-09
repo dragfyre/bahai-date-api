@@ -2,13 +2,13 @@
 
 So far, there are two endpoints for this API:
 
-**GET /today**
+**POST /today**
 
-Returns today's date according to the Baháʼí/Badí' calendar.
+Returns today's date according to the Baháʼí/Badí' calendar via POST request.
 
-**POST /date**
+**GET /date**
 
-Given a date from the Gregorian calendar defined via POST data, returns the corresponding date in the Baháʼí calendar.
+Given a date from the Gregorian calendar defined via GET data, returns the corresponding date in the Baháʼí calendar.
 
 ## Running
 

@@ -7,8 +7,8 @@ module.exports = function(app) {
     .get(bDate.test);
   // Today's Badi date
   app.route('/today')
-    .get(bDate.today);
+    .post(bDate.today);
   // Arbitrary Badi date
   app.route('/date')
-    .post(bDate.date);
+    .get(bDate.date);
 };
