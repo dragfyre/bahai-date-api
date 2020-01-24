@@ -58,7 +58,7 @@ function getTodayJSON () {
     greg_date: {
       year: now.getFullYear(),
       month: now.getMonth() + 1,
-      day: now.getDay(),
+      day: now.getDate(),
       hour: now.getHours(),
       minute: now.getMinutes(),
       second: now.getSeconds()
