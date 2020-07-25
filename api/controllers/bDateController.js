@@ -36,7 +36,7 @@ exports.test = function (req, res) {
 /**
  * @returns {BadiDateObject}
  */
-function getTodayJSON () {
+const getTodayJSON = exports.getTodayJSON = function () {
   const now = new Date();
   const here = {
     latitude: '40.712', // New York
@@ -45,42 +45,56 @@ function getTodayJSON () {
 
   const nowBadi = BadiCal.BadiDate.fromGregorianDate(now, here);
 
-  // eslint-disable-next-line no-console
-  console.log('Today: ' + nowBadi.toString());
   return {
-    message: 'Today is ' + nowBadi.toString(),
-    badi_date: {
-      year: nowBadi.getYear(),
-      month: nowBadi.getMonth(),
-      day: nowBadi.getDay(),
-      month_name: nowBadi.getMonthName()
-    },
-    greg_date: {
-      year: now.getFullYear(),
-      month: now.getMonth() + 1,
-      day: now.getDate(),
-      hour: now.getHours(),
-      minute: now.getMinutes(),
-      second: now.getSeconds()
+    now,
+    nowBadi,
+    json: {
+      message: 'Today is ' + nowBadi.toString(),
+      badi_date: {
+        year: nowBadi.getYear(),
+        month: nowBadi.getMonth(),
+        day: nowBadi.getDay(),
+        month_name: nowBadi.getMonthName()
+      },
+      greg_date: {
+        year: now.getFullYear(),
+        month: now.getMonth() + 1,
+        day: now.getDate(),
+        hour: now.getHours(),
+        minute: now.getMinutes(),
+        second: now.getSeconds()
+      }
     }
   };
-}
+};
 
 exports.today = function (req, res) {
-  res.json(getTodayJSON());
+  const {json, nowBadi} = getTodayJSON();
+  // eslint-disable-next-line no-console
+  console.log('Today: ' + nowBadi.toString());
+  res.json(json);
 };
 
 exports.todayHtml = function (req, res) {
-  res.end(JSON.stringify(getTodayJSON(), null, 2));
+  res.end(JSON.stringify(getTodayJSON().json, null, 2));
 };
 
 exports.date = function (req, res) {
-  const year = sanitizeInput(req.query.year);
-  const month = sanitizeInput(req.query.month) - 1;
-  const day = sanitizeInput(req.query.day);
-  const hour = sanitizeInput(req.query.hour);
-  const minute = sanitizeInput(req.query.minute);
-  const second = sanitizeInput(req.query.second);
+  const dateInfo = getDate(req.query);
+  // eslint-disable-next-line no-console
+  console.log(
+    'Date: ' + dateInfo.now.toString() + ' -> ' + dateInfo.nowBadi.toString()
+  );
+  res.json(dateInfo.json);
+};
+
+const getDate = exports.getDate = function (dateObj) {
+  const year = sanitizeInput(dateObj.year);
+  const month = sanitizeInput(dateObj.month) - 1;
+  const day = sanitizeInput(dateObj.day);
+  const hour = sanitizeInput(dateObj.hour);
+  const minute = sanitizeInput(dateObj.minute);
+  const second = sanitizeInput(dateObj.second);
 
   const now = new Date(year, month, day, hour, minute, second);
   const here = {
@@ -89,24 +103,25 @@ exports.date = function (req, res) {
   };
 
   const nowBadi = BadiCal.BadiDate.fromGregorianDate(now, here);
-  res.json({
-    message: 'The date is: ' + nowBadi.toString(),
-    badi_date: {
-      year: nowBadi.getYear(),
-      month: nowBadi.getMonth(),
-      day: nowBadi.getDay(),
-      month_name: nowBadi.getMonthName()
-    },
-    greg_date: {
-      year,
-      month: month + 1,
-      day,
-      hour,
-      minute,
-      second
+  return {
+    now,
+    nowBadi,
+    json: {
+      message: 'The date is: ' + nowBadi.toString(),
+      badi_date: {
+        year: nowBadi.getYear(),
+        month: nowBadi.getMonth(),
+        day: nowBadi.getDay(),
+        month_name: nowBadi.getMonthName()
+      },
+      greg_date: {
+        year,
+        month: month + 1,
+        day,
+        hour,
+        minute,
+        second
+      }
     }
-  });
-
-  // eslint-disable-next-line no-console
-  console.log('Date: ' + now.toString() + ' -> ' + nowBadi.toString());
+  };
 };

@@ -93,3 +93,7 @@ Output:
     }
 }
 ```
+
+## CLI usage
+
+![cli.svg](images/cli.svg)
