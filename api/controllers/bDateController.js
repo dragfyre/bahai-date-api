@@ -6,10 +6,11 @@ const BadiCal = require('../../vendor/assets/badi-cal/index.js');
  * @returns {Integer}
  */
 function sanitizeInput (s) {
-  if (s === '' || s === undefined || s === null || s === false || isNaN(s)) {
+  if (s === '' || s === undefined || s === null || s === false ||
+    Number.isNaN(Number(s))) {
     return 0;
   }
-  return parseInt(s);
+  return Number.parseInt(s);
 }
 
 exports.test = function (req, res) {
@@ -70,7 +71,7 @@ const getTodayJSON = exports.getTodayJSON = function () {
 
 exports.today = function (req, res) {
   const {json, nowBadi} = getTodayJSON();
-  // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console -- CLI
   console.log('Today: ' + nowBadi.toString());
   res.json(json);
 };
@@ -81,7 +82,7 @@ exports.todayHtml = function (req, res) {
 
 exports.date = function (req, res) {
   const dateInfo = getDate(req.query);
-  // eslint-disable-next-line no-console
+  // eslint-disable-next-line no-console -- CLI
   console.log(
     'Date: ' + dateInfo.now.toString() + ' -> ' + dateInfo.nowBadi.toString()
   );

@@ -2,11 +2,11 @@
 
 const pkg = require('../package.json');
 
-/* eslint-disable jsdoc/require-property */
+/* eslint-disable jsdoc/require-property -- Schema is already below */
 /**
 * @typedef {PlainObject} CoveradgeOptions
 */
-/* eslint-enable jsdoc/require-property */
+/* eslint-enable jsdoc/require-property -- Schema is already below */
 
 const optionDefinitions = [
   {
