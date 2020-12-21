@@ -12,7 +12,7 @@ const optionDefinitions = cliBasics(
 );
 
 if (!optionDefinitions) { // cliBasics handled
-  process.exit(); // eslint-disable-line no-process-exit
+  process.exit();
 }
 
 const {date, verbose} = optionDefinitions;
@@ -33,5 +33,5 @@ if (date) {
 }
 
 const output = verbose ? dateObj : dateObj.json.message;
-// eslint-disable-next-line no-console
+// eslint-disable-next-line no-console -- CLI
 console.log(output);

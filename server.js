@@ -21,5 +21,5 @@ routes(app); // register the route
 
 app.listen(port);
 
-// eslint-disable-next-line no-console
+// eslint-disable-next-line no-console -- CLI
 console.log('Baha\'i Date RESTful API server started: Port ' + port);
