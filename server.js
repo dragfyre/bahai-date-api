@@ -4,7 +4,7 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   RateLimit = require('express-rate-limit');
 
-const routes = require('./api/routes/bDateRoutes'); // importing route
+const routes = require('./api/routes/bDateRoutes.js'); // importing route
 
 const app = express(),
   port = process.argv[2] || 1844;

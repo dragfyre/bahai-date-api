@@ -1,6 +1,6 @@
 'use strict';
 module.exports = {
-  extends: ['ash-nazg/sauron-node', 'plugin:node/recommended-script'],
+  extends: ['ash-nazg/sauron-node-script-overrides'],
   rules: {
     'import/no-commonjs': 0,
     'node/exports-style': 0,
