@@ -1,5 +1,6 @@
 'use strict';
-const bDate = require('../controllers/bDateController');
+
+const bDate = require('../controllers/bDateController.js');
 
 module.exports = function (app) {
   // API test
