@@ -1,14 +1,20 @@
 # Baháʼí Date RESTful API
 
-So far, there are two endpoints for this API:
+So far, there are three endpoints for this API:
 
 **POST /today**
 
 Returns today's date according to the Baháʼí/Badí' calendar via POST request.
 
+**GET /today**
+
+Returns today's date according to the Baháʼí/Badí' calendar via GET request (as
+HTML).
+
 **GET /date**
 
-Given a date from the Gregorian calendar defined via GET data, returns the corresponding date in the Baháʼí calendar.
+Given a date from the Gregorian calendar defined via GET data, returns the
+corresponding date in the Baháʼí calendar (as JSON).
 
 ## Public endpoints
 
@@ -58,12 +64,13 @@ Output:
 
 ```json
 {
-    "message": "The date is: 9 ‘Aẓamat 1",
+    "message": "The date is: 8 ‘Aẓamat (Grandeur) 1 B.E.",
     "badi_date": {
         "year": 1,
         "month": 3,
-        "day": 9,
-        "month_name": "‘Aẓamat"
+        "day": 8,
+        "month_name": "‘Aẓamat (Grandeur)",
+        "timezone_id": "Asia/Jerusalem"
     },
     "greg_date": {
         "year": 1844,
@@ -71,7 +78,8 @@ Output:
         "day": 23,
         "hour": 20,
         "minute": 45,
-        "second": 0
+        "second": 0,
+        "timezoneOffset": 0
     }
 }
 ```
@@ -84,12 +92,13 @@ Output:
 
 ```json
 {
-    "message": "The date is: 10 Mulk 170",
+    "message": "The date is: 9 Mulk (Dominion) 170 B.E.",
     "badi_date": {
         "year": 170,
-        "month": 17,
-        "day": 10,
-        "month_name": "Mulk"
+        "month": 18,
+        "day": 9,
+        "month_name": "Mulk (Dominion)",
+        "timezone_id": "Asia/Jerusalem"
     },
     "greg_date": {
         "year": 2014,
@@ -97,7 +106,8 @@ Output:
         "day": 15,
         "hour": 13,
         "minute": 45,
-        "second": 0
+        "second": 0,
+        "timezoneOffset": 0
     }
 }
 ```
