@@ -26,11 +26,13 @@ Public endpoints are now available on bahai-browser.org:
 
 ## Running
 
-To launch the API server, simply navigate to the main folder and type `npm start`.
+To launch the API server, simply navigate to the main folder and type
+`npm start`.
 
 ## Examples
 
-From either endpoint, the output is returned in a similar format: a JSON object containing a message, a Baháʼí calendar date, and a Gregorian date/time.
+From either endpoint, the output is returned in a similar format: a JSON object
+containing a message, a Baháʼí calendar date, and a Gregorian date/time.
 
 ### Today
 
@@ -43,7 +45,8 @@ URL: localhost:1844/today
         "year": 174,
         "month": 14,
         "day": 13,
-        "month_name": "Masá’il"
+        "month_name": "Masá’il",
+        "timezone_id": "Asia/Jerusalem"
     },
     "greg_date": {
         "year": 2017,
@@ -51,12 +54,27 @@ URL: localhost:1844/today
         "day": 5,
         "hour": 23,
         "minute": 19,
-        "second": 12
+        "second": 12,
+        "timezoneOffset": 0
     }
 }
 ```
 
-### May 23, 1844
+### `date`
+
+Available parameters include:
+
+- `year`
+- `month`
+- `day`
+- `hour`
+- `minute`
+- `second`
+- `latitude`
+- `longitude`
+- `timezoneId`
+
+#### May 23, 1844
 
 URL: localhost:1844/date?year=1844&month=5&day=23&hour=20&minute=45
 
@@ -79,12 +97,12 @@ Output:
         "hour": 20,
         "minute": 45,
         "second": 0,
-        "timezoneOffset": 0
+        "timezoneOffset": -480
     }
 }
 ```
 
-### February 15, 2014
+#### February 15, 2014
 
 URL: localhost:1844/date?year=2014&month=2&day=15&hour=13&minute=45
 
@@ -107,7 +125,7 @@ Output:
         "hour": 13,
         "minute": 45,
         "second": 0,
-        "timezoneOffset": 0
+        "timezoneOffset": -485
     }
 }
 ```
