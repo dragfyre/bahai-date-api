@@ -70,13 +70,14 @@ exports.test = function (req, res) {
 };
 
 /**
-* @typedef {PlainObject} LocalBadiDateObject
+* @typedef {PlainObject} BadiDateInfo
 * @property {string} message
 * @property {PlainObject} badi_date
 * @property {Integer} badi_date.year
 * @property {Integer} badi_date.month
 * @property {Integer} badi_date.day
 * @property {string} badi_date.month_name
+* @property {string} badi_date.timezone_id
 * @property {PlainObject} greg_date
 * @property {Integer} greg_date.year
 * @property {Integer} greg_date.month
@@ -84,11 +85,19 @@ exports.test = function (req, res) {
 * @property {Integer} greg_date.hour
 * @property {Integer} greg_date.minute
 * @property {Integer} greg_date.second
+* @property {Integer} greg_date.timezoneOffset
+*/
+
+/**
+* @typedef {PlainObject} BadiDateResponse
+* @property {Date} now
+* @property {LocalBadiDate} nowBadi
+* @property {BadiDateInfo} json
 */
 
 /**
  * @param {DateConfig} dateObj
- * @returns {LocalBadiDateObject}
+ * @returns {BadiDateResponse}
  */
 const getTodayJSON = exports.getTodayJSON = function (dateObj = {}) {
   const now = new Date();
@@ -110,7 +119,8 @@ const getTodayJSON = exports.getTodayJSON = function (dateObj = {}) {
         year: nowBadi.badiDate.year,
         month: nowBadi.badiDate.month,
         day: nowBadi.badiDate.day,
-        month_name: nowBadi.badiDate.format('MM+')
+        month_name: nowBadi.badiDate.format('MM+'),
+        timezone_id: nowBadi.timezoneId
       },
       greg_date: {
         year: now.getFullYear(),
@@ -118,7 +128,8 @@ const getTodayJSON = exports.getTodayJSON = function (dateObj = {}) {
         day: now.getDate(),
         hour: now.getHours(),
         minute: now.getMinutes(),
-        second: now.getSeconds()
+        second: now.getSeconds(),
+        timezoneOffset: now.getTimezoneOffset()
       }
     }
   };
@@ -146,6 +157,20 @@ exports.date = function (req, res) {
   res.json(dateInfo.json);
 };
 
+/**
+* @typedef {DateConfig} FullDateConfig
+* @property {Integer} year
+* @property {Integer} month
+* @property {Integer} day
+* @property {Integer} hour
+* @property {Integer} minute
+* @property {Integer} second
+*/
+
+/**
+ * @param {FullDateConfig} dateObj
+ * @returns {BadiDateResponse}
+ */
 const getDate = exports.getDate = function (dateObj) {
   const year = sanitizeInteger(dateObj.year);
   const month = sanitizeInteger(dateObj.month) - 1;
