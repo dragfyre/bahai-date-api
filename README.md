@@ -10,6 +10,14 @@ Returns today's date according to the Baháʼí/Badí' calendar via POST request
 
 Given a date from the Gregorian calendar defined via GET data, returns the corresponding date in the Baháʼí calendar.
 
+## Public endpoints
+
+Public endpoints are now available on bahai-browser.org:
+
+**/today** - https://bahai-browser.org/today
+
+**/date** - https://bahai-browser.org/date
+
 ## Running
 
 To launch the API server, simply navigate to the main folder and type `npm start`.
