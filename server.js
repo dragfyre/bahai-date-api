@@ -1,6 +1,4 @@
-'use strict';
-
-const createServer = require('./createServer.js');
+import createServer from './createServer.js';
 
 const port = process.argv[2] || 1844;
 

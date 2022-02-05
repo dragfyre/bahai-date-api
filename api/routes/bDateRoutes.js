@@ -1,8 +1,10 @@
-'use strict';
+import * as bDate from '../controllers/bDateController.js';
 
-const bDate = require('../controllers/bDateController.js');
-
-module.exports = function (app) {
+/**
+ * @param {ExpressApp} app
+ * @returns {void}
+ */
+function routes (app) {
   // API test
   app.route('/test')
     .get(bDate.test);
@@ -15,4 +17,6 @@ module.exports = function (app) {
 
   app.route('/today')
     .get(bDate.todayHtml);
-};
+}
+
+export default routes;

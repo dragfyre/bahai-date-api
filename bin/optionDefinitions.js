@@ -1,6 +1,8 @@
-'use strict';
+import {readFileSync} from 'fs';
 
-const pkg = require('../package.json');
+const pkg = JSON.parse(readFileSync(
+  new URL('../package.json', import.meta.url)
+));
 
 /* eslint-disable jsdoc/require-property -- Schema is already below */
 /**
@@ -32,5 +34,4 @@ const cliSections = [
   }
 ];
 
-exports.definitions = optionDefinitions;
-exports.sections = cliSections;
+export {optionDefinitions as definitions, cliSections as sections};
