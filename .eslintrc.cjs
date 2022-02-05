@@ -1,6 +1,10 @@
 'use strict';
+
 module.exports = {
-  extends: ['ash-nazg/sauron-node-script-overrides'],
+  extends: ['ash-nazg/sauron-node-overrides'],
+  parserOptions: {
+    ecmaVersion: 2021
+  },
   rules: {
     'import/no-commonjs': 0,
     'node/exports-style': 0,

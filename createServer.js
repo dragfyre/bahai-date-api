@@ -1,10 +1,8 @@
-'use strict';
+import express from 'express';
+import bodyParser from 'body-parser';
+import rateLimit from 'express-rate-limit';
 
-const express = require('express'),
-  bodyParser = require('body-parser'),
-  RateLimit = require('express-rate-limit');
-
-const routes = require('./api/routes/bDateRoutes.js'); // importing routes
+import routes from './api/routes/bDateRoutes.js'; // importing routes
 
 /**
 * @returns {ExpressApp}
@@ -12,7 +10,7 @@ const routes = require('./api/routes/bDateRoutes.js'); // importing routes
 function createServer () {
   const app = express();
 
-  app.use(new RateLimit({
+  app.use(rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
     max: 20
   }));
@@ -25,4 +23,4 @@ function createServer () {
   return app;
 }
 
-module.exports = createServer;
+export default createServer;

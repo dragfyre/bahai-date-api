@@ -1,13 +1,15 @@
 #!/usr/bin/env node
-'use strict';
 
-const {join} = require('path');
-const {cliBasics} = require('command-line-basics');
-const {
+import {dirname, join} from 'path';
+import {fileURLToPath} from 'url';
+import {cliBasics} from 'command-line-basics';
+import {
   getDate, getTodayJSON
-} = require('../api/controllers/bDateController.js');
+} from '../api/controllers/bDateController.js';
 
-const optionDefinitions = cliBasics(
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const optionDefinitions = await cliBasics(
   join(__dirname, './optionDefinitions.js')
 );
 

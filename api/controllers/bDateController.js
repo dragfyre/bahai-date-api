@@ -1,7 +1,6 @@
-'use strict';
-const luxon = require('luxon');
+import * as luxon from 'luxon';
 
-const {LocalBadiDate} = require('badidate');
+import {LocalBadiDate} from 'badidate';
 
 /**
  * @typedef {PlainObject} DateConfig
@@ -11,17 +10,17 @@ const {LocalBadiDate} = require('badidate');
  */
 
 /**
- * @param {Date} date
+ * @param {Date} dte
  * @param {DateConfig} dateCfg
  * @returns {LocalBadiDate}
  */
-function createDateObject (date, {
+function createDateObject (dte, {
   // Bahjí
   latitude = 32.9434,
   longitude = 35.0924,
   timezoneId = 'Asia/Jerusalem'
 } = {}) {
-  const luxonDate = luxon.DateTime.fromJSDate(date);
+  const luxonDate = luxon.DateTime.fromJSDate(dte);
   return new LocalBadiDate(luxonDate, latitude, longitude, timezoneId);
 }
 
@@ -65,9 +64,14 @@ function sanitizeInteger (s) {
   return Number.parseInt(s);
 }
 
-exports.test = function (req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {void}
+ */
+function test (req, res) {
   res.json({message: 'Hi there'});
-};
+}
 
 /**
 * @typedef {PlainObject} BadiDateInfo
@@ -99,7 +103,7 @@ exports.test = function (req, res) {
  * @param {DateConfig} dateObj
  * @returns {BadiDateResponse}
  */
-const getTodayJSON = exports.getTodayJSON = function (dateObj = {}) {
+const getTodayJSON = function (dateObj = {}) {
   const now = new Date();
 
   const latitude = sanitizeFloat(dateObj.latitude);
@@ -135,19 +139,34 @@ const getTodayJSON = exports.getTodayJSON = function (dateObj = {}) {
   };
 };
 
-exports.today = function (req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {void}
+ */
+function today (req, res) {
   const {json, nowBadi} = getTodayJSON(req.query);
   // eslint-disable-next-line no-console -- CLI
   console.log('Today: ' + nowBadi.badiDate.format());
   res.json(json);
-};
+}
 
-exports.todayHtml = function (req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {void}
+ */
+function todayHtml (req, res) {
   res.set('content-type', 'text/html;charset=utf-8');
   res.end(JSON.stringify(getTodayJSON(req.query).json, null, 2));
-};
+}
 
-exports.date = function (req, res) {
+/**
+ * @param {Request} req
+ * @param {Response} res
+ * @returns {void}
+ */
+function date (req, res) {
   const dateInfo = getDate(req.query);
   // eslint-disable-next-line no-console -- CLI
   console.log(
@@ -155,7 +174,7 @@ exports.date = function (req, res) {
       dateInfo.nowBadi.badiDate.format()
   );
   res.json(dateInfo.json);
-};
+}
 
 /**
 * @typedef {DateConfig} FullDateConfig
@@ -171,7 +190,7 @@ exports.date = function (req, res) {
  * @param {FullDateConfig} dateObj
  * @returns {BadiDateResponse}
  */
-const getDate = exports.getDate = function (dateObj) {
+const getDate = function (dateObj) {
   const year = sanitizeInteger(dateObj.year);
   const month = sanitizeInteger(dateObj.month) - 1;
   const day = sanitizeInteger(dateObj.day);
@@ -213,3 +232,5 @@ const getDate = exports.getDate = function (dateObj) {
     }
   };
 };
+
+export {test, getTodayJSON, today, todayHtml, date, getDate};
