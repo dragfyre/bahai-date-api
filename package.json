@@ -1,5 +1,5 @@
 {
-  "name": "bahai-date-rest-api",
+  "name": "bahai-date-api",
   "version": "1.0.0",
   "description": "RESTful Bahá'í date API",
   "main": "api/controllers/bDateController.js",
