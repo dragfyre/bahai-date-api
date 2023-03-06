@@ -10,9 +10,9 @@ import {LocalBadiDate} from 'badidate';
  */
 
 /**
- * @param {Date} dte
+ * @param {LuxonDateObject} dte
  * @param {DateConfig} dateCfg
- * @returns {LocalBadiDate}
+ * @returns {[LuxonDate, LocalBadiDate]}
  */
 function createDateObject (dte, {
   // Bahjí
@@ -20,8 +20,13 @@ function createDateObject (dte, {
   longitude = 35.0924,
   timezoneId = 'Asia/Jerusalem'
 } = {}) {
-  const luxonDate = luxon.DateTime.fromJSDate(dte);
-  return new LocalBadiDate(luxonDate, latitude, longitude, timezoneId);
+  const luxonDate = luxon.DateTime.fromObject(dte).setZone(
+    timezoneId
+  );
+  return [
+    luxonDate,
+    new LocalBadiDate(luxonDate, latitude, longitude, timezoneId)
+  ];
 }
 
 /**
@@ -40,7 +45,11 @@ function sanitizeTimeZone (tz) {
 }
 
 /**
- * @param {any} s
+ * @typedef {any} ArbitraryArgumentToConvert
+ */
+
+/**
+ * @param {ArbitraryArgumentToConvert} s
  * @returns {Float|undefined}
  */
 function sanitizeFloat (s) {
@@ -53,7 +62,7 @@ function sanitizeFloat (s) {
 }
 
 /**
- * @param {any} s
+ * @param {ArbitraryArgumentToConvert} s
  * @returns {Integer}
  */
 function sanitizeInteger (s) {
@@ -104,13 +113,11 @@ function test (req, res) {
  * @returns {BadiDateResponse}
  */
 const getTodayJSON = function (dateObj = {}) {
-  const now = new Date();
-
   const latitude = sanitizeFloat(dateObj.latitude);
   const longitude = sanitizeFloat(dateObj.longitude);
   const timezoneId = sanitizeTimeZone(dateObj.timezoneId);
 
-  const nowBadi = createDateObject(now, {
+  const [now, nowBadi] = createDateObject({}, {
     latitude, longitude, timezoneId
   });
 
@@ -127,13 +134,13 @@ const getTodayJSON = function (dateObj = {}) {
         timezone_id: nowBadi.timezoneId
       },
       greg_date: {
-        year: now.getFullYear(),
-        month: now.getMonth() + 1,
-        day: now.getDate(),
-        hour: now.getHours(),
-        minute: now.getMinutes(),
-        second: now.getSeconds(),
-        timezoneOffset: now.getTimezoneOffset()
+        year: now.year,
+        month: now.month,
+        day: now.day,
+        hour: now.hour,
+        minute: now.minute,
+        second: now.second,
+        timezoneOffset: now.offset
       }
     }
   };
@@ -192,19 +199,19 @@ function date (req, res) {
  */
 const getDate = function (dateObj) {
   const year = sanitizeInteger(dateObj.year);
-  const month = sanitizeInteger(dateObj.month) - 1;
+  const month = sanitizeInteger(dateObj.month);
   const day = sanitizeInteger(dateObj.day);
   const hour = sanitizeInteger(dateObj.hour);
   const minute = sanitizeInteger(dateObj.minute);
   const second = sanitizeInteger(dateObj.second);
 
-  const now = new Date(year, month, day, hour, minute, second);
-
   const latitude = sanitizeFloat(dateObj.latitude);
   const longitude = sanitizeFloat(dateObj.longitude);
   const timezoneId = sanitizeTimeZone(dateObj.timezoneId);
 
-  const nowBadi = createDateObject(now, {
+  const [now, nowBadi] = createDateObject({
+    year, month, day, hour, minute, second
+  }, {
     latitude, longitude, timezoneId
   });
 
@@ -221,13 +228,13 @@ const getDate = function (dateObj) {
         timezone_id: nowBadi.timezoneId
       },
       greg_date: {
-        year,
-        month: month + 1,
-        day,
-        hour,
-        minute,
-        second,
-        timezoneOffset: now.getTimezoneOffset()
+        year: now.year,
+        month: now.month,
+        day: now.day,
+        hour: now.hour,
+        minute: now.minute,
+        second: now.second,
+        timezoneOffset: now.offset
       }
     }
   };
