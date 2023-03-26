@@ -24,7 +24,7 @@ if (date) {
   const dte = new Date(date);
   dateObj = getDate({
     year: dte.getFullYear(),
-    month: dte.getMonth(),
+    month: dte.getMonth() + 1,
     day: dte.getDate(),
     hour: dte.getHours(),
     minute: dte.getMinutes(),
