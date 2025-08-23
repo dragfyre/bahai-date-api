@@ -1,16 +1,15 @@
 #!/usr/bin/env node
 
-import {dirname, join} from 'path';
-import {fileURLToPath} from 'url';
 import {cliBasics} from 'command-line-basics';
 import {
   getDate, getTodayJSON
 } from '../api/controllers/bDateController.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 const optionDefinitions = await cliBasics(
-  join(__dirname, './optionDefinitions.js')
+  import.meta.dirname + '/optionDefinitions.js',
+  {
+    packageJsonPath: import.meta.dirname + '/../package.json'
+  }
 );
 
 if (!optionDefinitions) { // cliBasics handled
