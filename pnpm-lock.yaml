@@ -676,7 +676,7 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
-      ansi-to-html: git@github.com+brettz9/ansi-to-html/0eaa84080b8b2f1aaa01f99ccaf564c28b11dd4b
+      ansi-to-html: git/github.com+brettz9/ansi-to-html/0eaa84080b8b2f1aaa01f99ccaf564c28b11dd4b
       ansi-to-svg: 1.4.3
       command-line-basics: 1.1.0
       command-line-usage: 6.1.1
@@ -3308,7 +3308,7 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  git@github.com+brettz9/ansi-to-html/0eaa84080b8b2f1aaa01f99ccaf564c28b11dd4b:
+  git/github.com+brettz9/ansi-to-html/0eaa84080b8b2f1aaa01f99ccaf564c28b11dd4b:
     resolution: {commit: 0eaa84080b8b2f1aaa01f99ccaf564c28b11dd4b, repo: git@github.com:brettz9/ansi-to-html.git, type: git}
     name: ansi-to-html
     version: 0.6.11
