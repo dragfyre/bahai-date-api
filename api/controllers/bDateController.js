@@ -1,3 +1,4 @@
+/* eslint-disable camelcase -- Current API */
 import * as luxon from 'luxon';
 
 import {LocalBadiDate} from 'badidate';
@@ -35,8 +36,9 @@ function createDateObject (dte, {
 */
 function sanitizeTimeZone (tz) {
   try {
-    const timeZone = tz.replace(/ /gu, '_');
-    Intl.DateTimeFormat(undefined, {timeZone});
+    const timeZone = tz.replaceAll(' ', '_');
+    // eslint-disable-next-line no-new -- Testing
+    new Intl.DateTimeFormat(undefined, {timeZone});
     return timeZone;
   } catch (err) {
     // Will allow default above to be used
@@ -44,9 +46,11 @@ function sanitizeTimeZone (tz) {
   }
 }
 
+/* eslint-disable jsdoc/reject-any-type -- Arbitrary */
 /**
  * @typedef {any} ArbitraryArgumentToConvert
  */
+/* eslint-enable jsdoc/reject-any-type -- Arbitrary */
 
 /**
  * @param {ArbitraryArgumentToConvert} s
