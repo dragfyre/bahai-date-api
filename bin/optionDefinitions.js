@@ -1,13 +1,16 @@
 import {readFile} from 'fs/promises';
 
-const pkg = JSON.parse(await readFile(
-  new URL('../package.json', import.meta.url)
-));
+const pkg = JSON.parse(
+  // @ts-expect-error Ok
+  await readFile(
+    new URL('../package.json', import.meta.url)
+  )
+);
 
 /* eslint-disable jsdoc/require-property -- Schema is already below */
 /**
-* @typedef {PlainObject} CoveradgeOptions
-*/
+ * @typedef {object} CoveradgeOptions
+ */
 /* eslint-enable jsdoc/require-property -- Schema is already below */
 
 const optionDefinitions = [

@@ -1,13 +1,21 @@
 {
   "name": "bahai-date-api",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "RESTful Bahá'í date API",
   "main": "api/controllers/bDateController.js",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/api/controllers/bDateController.d.ts",
+      "import": "./api/controllers/bDateController.js"
+    }
+  },
   "bin": {
     "bahai-date": "./bin/bahai-date-api.js"
   },
   "scripts": {
+    "attw": "attw --pack .",
+    "tsc": "tsc",
     "lint": "eslint --ext=js,md,html .",
     "today": "./bin/bahai-date-api.js",
     "date": "./bin/bahai-date-api.js --date 1999-01-01",
@@ -39,17 +47,23 @@
   },
   "homepage": "https://github.com/dragfyre/bahai-date-api#readme",
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@types/body-parser": "^1.19.6",
+    "@types/express": "^5.0.6",
+    "@types/luxon": "^3.7.1",
+    "@types/node": "^25.6.0",
     "command-line-publish": "^1.1.0",
     "eslint": "^9.39.1",
     "eslint-config-ash-nazg": "^39.8.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.14",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
     "badidate": "^3.1.1",
-    "body-parser": "^2.2.0",
+    "body-parser": "^2.2.2",
     "command-line-basics": "^3.0.0",
-    "express": "^5.1.0",
-    "express-rate-limit": "^8.2.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.4.0",
     "luxon": "^3.7.2"
   }
 }

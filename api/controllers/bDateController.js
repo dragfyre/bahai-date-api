@@ -4,16 +4,28 @@ import * as luxon from 'luxon';
 import {LocalBadiDate} from 'badidate';
 
 /**
- * @typedef {PlainObject} DateConfig
- * @property {string} latitude
- * @property {string} longitude
+ * @import {DateTime, DateObjectUnits} from 'luxon';
+ */
+
+/**
+ * @typedef {number} Integer
+ */
+
+/**
+ * @typedef {number} Float
+ */
+
+/**
+ * @typedef {object} DateConfig
+ * @property {Float} latitude
+ * @property {Float} longitude
  * @property {string} timezoneId
  */
 
 /**
- * @param {LuxonDateObject} dte
- * @param {DateConfig} dateCfg
- * @returns {[LuxonDate, LocalBadiDate]}
+ * @param {DateObjectUnits} dte
+ * @param {Partial<DateConfig>} dateCfg
+ * @returns {[DateTime, LocalBadiDate]}
  */
 function createDateObject (dte, {
   // Bahjí
@@ -31,10 +43,14 @@ function createDateObject (dte, {
 }
 
 /**
-* @param {string} tz
+* @param {string|undefined} tz
 * @returns {string|undefined}
 */
 function sanitizeTimeZone (tz) {
+  if (tz === undefined) {
+    return undefined;
+  }
+
   try {
     const timeZone = tz.replaceAll(' ', '_');
     // eslint-disable-next-line no-new -- Testing
@@ -78,8 +94,8 @@ function sanitizeInteger (s) {
 }
 
 /**
- * @param {Request} req
- * @param {Response} res
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  * @returns {void}
  */
 function test (req, res) {
@@ -87,15 +103,15 @@ function test (req, res) {
 }
 
 /**
-* @typedef {PlainObject} BadiDateInfo
+* @typedef {object} BadiDateInfo
 * @property {string} message
-* @property {PlainObject} badi_date
+* @property {object} badi_date
 * @property {Integer} badi_date.year
 * @property {Integer} badi_date.month
 * @property {Integer} badi_date.day
 * @property {string} badi_date.month_name
 * @property {string} badi_date.timezone_id
-* @property {PlainObject} greg_date
+* @property {object} greg_date
 * @property {Integer} greg_date.year
 * @property {Integer} greg_date.month
 * @property {Integer} greg_date.day
@@ -106,14 +122,14 @@ function test (req, res) {
 */
 
 /**
-* @typedef {PlainObject} BadiDateResponse
-* @property {Date} now
+* @typedef {object} BadiDateResponse
+* @property {DateTime} now
 * @property {LocalBadiDate} nowBadi
 * @property {BadiDateInfo} json
 */
 
 /**
- * @param {DateConfig} dateObj
+ * @param {Partial<DateConfig>} dateObj
  * @returns {BadiDateResponse}
  */
 const getTodayJSON = function (dateObj = {}) {
@@ -151,8 +167,8 @@ const getTodayJSON = function (dateObj = {}) {
 };
 
 /**
- * @param {Request} req
- * @param {Response} res
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  * @returns {void}
  */
 function today (req, res) {
@@ -163,8 +179,8 @@ function today (req, res) {
 }
 
 /**
- * @param {Request} req
- * @param {Response} res
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  * @returns {void}
  */
 function todayHtml (req, res) {
@@ -173,8 +189,8 @@ function todayHtml (req, res) {
 }
 
 /**
- * @param {Request} req
- * @param {Response} res
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  * @returns {void}
  */
 function date (req, res) {
@@ -188,17 +204,18 @@ function date (req, res) {
 }
 
 /**
-* @typedef {DateConfig} FullDateConfig
-* @property {Integer} year
-* @property {Integer} month
-* @property {Integer} day
-* @property {Integer} hour
-* @property {Integer} minute
-* @property {Integer} second
-*/
+ * @typedef {Partial<DateConfig> & {
+ *   year: Integer,
+ *   month: Integer,
+ *   day: Integer,
+ *   hour: Integer,
+ *   minute: Integer,
+ *   second: Integer
+ * }} FullDateConfig
+ */
 
 /**
- * @param {FullDateConfig} dateObj
+ * @param {Partial<FullDateConfig>} dateObj
  * @returns {BadiDateResponse}
  */
 const getDate = function (dateObj) {
