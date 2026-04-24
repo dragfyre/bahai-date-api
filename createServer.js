@@ -5,8 +5,14 @@ import expressRateLimit from 'express-rate-limit';
 import routes from './api/routes/bDateRoutes.js'; // importing routes
 
 /**
- * @param {ExpressApp} app
- * @returns {ExpressApp}
+ * @param {{
+ *   app?: import('express').Application
+ *   rateLimit?: {
+ *     windowMs: number,
+ *     max: number
+ *   }
+ * }} [app]
+ * @returns {import('express').Application}
  */
 function createServer ({
   app = express(),

@@ -1,6 +1,6 @@
 import ashNazg from 'eslint-config-ash-nazg';
 
-export default [
+export default /** @type {import('eslint').Linter.Config} */ ([
   {
     ignores: ['vendor']
   },
@@ -9,4 +9,4 @@ export default [
     rules: {
     }
   }
-];
+]);

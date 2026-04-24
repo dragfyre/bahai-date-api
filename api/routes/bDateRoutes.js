@@ -1,7 +1,7 @@
 import * as bDate from '../controllers/bDateController.js';
 
 /**
- * @param {ExpressApp} app
+ * @param {import('express').Application} app
  * @returns {void}
  */
 function routes (app) {
